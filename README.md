@@ -1,5 +1,7 @@
 # UIKit
 
+[![](https://jitpack.io/v/ITGungnir/UIKit.svg)](https://jitpack.io/#ITGungnir/UIKit)
+
 `UIKit`是一个控件库，其中提供的控件及文档如下：
 * [Banner](./docs/Banner.md)：一个可以自动无限循环滚动的控件
 * [BottomTab](./docs/BottomTab.md)：一个底部导航栏控件
