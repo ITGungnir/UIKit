@@ -1,6 +1,9 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = 'com.github.ITGungnir'
 
 android {
     compileSdkVersion target_sdk_version
@@ -35,8 +38,4 @@ dependencies {
     implementation "com.jakewharton.rxbinding2:rxbinding:$rxbinding_version"
     // Widgets
     implementation "com.google.android:flexbox:$flex_version"
-    // Tools
-    debugApi "com.squareup.leakcanary:leakcanary-android:$leak_canary_version"
-    debugApi "com.squareup.leakcanary:leakcanary-support-fragment:$leak_canary_version"
-    releaseApi "com.squareup.leakcanary:leakcanary-android-no-op:$leak_canary_version"
 }

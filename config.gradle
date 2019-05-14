@@ -20,6 +20,7 @@ ext {
     // Widgets
     flex_version = '1.0.0'
     // Tools
+    jitpack_version = '2.1'
     rxmvvm_version = '1.1.6'
     leak_canary_version = '1.6.3'
 }
