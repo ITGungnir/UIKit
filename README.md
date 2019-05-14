@@ -1,7 +1,7 @@
 # UIKit
 
 `UIKit`是一个控件库，其中提供的控件及文档如下：
-* [Banner](../docs/Banner.md)：一个可以自动无限循环滚动的控件
+* [Banner](./docs/Banner.md)：一个可以自动无限循环滚动的控件
 * [BottomTab](../docs/BottomTab.md)：一个底部导航栏控件
 * [Browser](../docs/Browser.md)：一个带进度条的网页加载和展示控件
 * [CommonPage](../docs/CommonPage.md)：一个通用页面
