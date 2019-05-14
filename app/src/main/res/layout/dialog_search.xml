@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:background="@color/colorPure"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <my.itgungnir.ui.search_bar.SearchBar
+            android:id="@+id/searchBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:sb_btnColor="@color/colorAccent"
+            app:sb_dividerColor="@color/clr_divider"
+            app:sb_hint="请输入搜索关键词"
+            app:sb_hintColor="@color/clr_divider"
+            app:sb_iconFont="\ue833"
+            app:sb_textColor="@color/clr_text" />
+
+        <my.itgungnir.ui.flex.ScrollableFlexView
+            android:id="@+id/flexView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:clipToPadding="false"
+            android:paddingBottom="10dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

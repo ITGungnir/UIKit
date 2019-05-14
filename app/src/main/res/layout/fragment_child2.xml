@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <my.itgungnir.ui.input.TextInput
+        android:id="@+id/textInput"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="10dp"
+        app:ti_dividerColor="@color/clr_divider"
+        app:ti_hint="请输入用户名"
+        app:ti_hintColor="@color/clr_divider"
+        app:ti_iconColor="@color/clr_text"
+        app:ti_iconFont="\ue6f2"
+        app:ti_textColor="@color/clr_text" />
+
+    <my.itgungnir.ui.input.ShadowInput
+        android:id="@+id/shadowInput"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="30dp"
+        android:background="@color/clr_divider"
+        app:si_hint="请输入手机号"
+        app:si_hintColor="@color/clr_background"
+        app:si_iconColor="@color/clr_background"
+        app:si_iconFont="\ue6f2"
+        app:si_textColor="@color/clr_background" />
+
+    <my.itgungnir.ui.input.PasswordInput
+        android:id="@+id/passwordInput"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="30dp"
+        app:pi_dividerColor="@color/clr_divider"
+        app:pi_hideIcon="\ue8d5"
+        app:pi_hint="请输入密码"
+        app:pi_hintColor="@color/clr_divider"
+        app:pi_iconColor="@color/clr_text"
+        app:pi_showIcon="\ue8d4"
+        app:pi_textColor="@color/clr_text" />
+
+    <my.itgungnir.ui.input.ProgressButton
+        android:id="@+id/progressButton"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="10dp"
+        app:pb_cornerRadius="5dp"
+        app:pb_disabledColor="@color/clr_divider"
+        app:pb_disabledTextColor="@color/clr_text"
+        app:pb_enabledColor="@color/colorAccent"
+        app:pb_enabledTextColor="@color/clr_text" />
+
+</LinearLayout>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="Banner">
+        <attr name="b_scrollTimeSpan" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="CommonPage">
+        <attr name="cp_fabBackColor" format="color" />
+        <attr name="cp_fabSrc" format="reference" />
+        <attr name="cp_fabRippleColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="HeadBar">
+        <attr name="hb_textColor" format="color" />
+        <attr name="hb_showDivider" format="boolean" />
+        <attr name="hb_dividerColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="IconFontView">
+        <attr name="ifv_iconFontFace" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="PasswordInput">
+        <attr name="pi_hint" format="string" />
+        <attr name="pi_hintColor" format="color" />
+        <attr name="pi_textColor" format="color" />
+        <attr name="pi_showIcon" format="string" />
+        <attr name="pi_hideIcon" format="string" />
+        <attr name="pi_iconColor" format="color" />
+        <attr name="pi_dividerColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="ProgressButton">
+        <attr name="pb_enabledColor" format="color" />
+        <attr name="pb_disabledColor" format="color" />
+        <attr name="pb_enabledTextColor" format="color" />
+        <attr name="pb_disabledTextColor" format="color" />
+        <attr name="pb_cornerRadius" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="ShadowInput">
+        <attr name="si_hint" format="string" />
+        <attr name="si_hintColor" format="color" />
+        <attr name="si_textColor" format="color" />
+        <attr name="si_iconFont" format="string" />
+        <attr name="si_iconColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="TextInput">
+        <attr name="ti_hint" format="string" />
+        <attr name="ti_hintColor" format="color" />
+        <attr name="ti_textColor" format="color" />
+        <attr name="ti_iconFont" format="string" />
+        <attr name="ti_iconColor" format="color" />
+        <attr name="ti_dividerColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="SearchBar">
+        <attr name="sb_hint" format="string" />
+        <attr name="sb_hintColor" format="color" />
+        <attr name="sb_textColor" format="color" />
+        <attr name="sb_iconFont" format="string" />
+        <attr name="sb_btnColor" format="color" />
+        <attr name="sb_dividerColor" format="color" />
+    </declare-styleable>
+
+</resources>

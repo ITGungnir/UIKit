@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPure"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <my.itgungnir.ui.icon_font.IconFontView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="\ue6ec"
+        android:textColor="@color/clr_text"
+        android:textSize="120dp" />
+
+    <TextView
+        android:id="@+id/errorMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/app_name"
+        android:textColor="@color/clr_text"
+        android:textSize="14dp" />
+
+    <my.itgungnir.ui.input.ProgressButton
+        android:id="@+id/reload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingStart="20dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="5dp" />
+
+</LinearLayout>
