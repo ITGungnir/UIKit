@@ -5,6 +5,8 @@ import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
 import android.view.View
+import android.widget.EditText
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.view_search_bar.view.*
@@ -25,8 +27,14 @@ class SearchBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     private var btnColor: Int = Color.BLACK
     private var dividerColor: Int = Color.LTGRAY
 
+    private var inputView: EditText? = null
+    private var searchBtn: TextView? = null
+
     init {
         View.inflate(context, R.layout.view_search_bar, this)
+
+        this.inputView = inputBar
+        this.searchBtn = search
 
         context.obtainStyledAttributes(attrs, R.styleable.SearchBar).apply {
             hintStr = getString(R.styleable.SearchBar_sb_hint) ?: hintStr
@@ -43,13 +51,13 @@ class SearchBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
             textColor = this@SearchBar.textColor
         }
 
-        inputBar.apply {
+        inputView?.apply {
             hint = hintStr
             hintTextColor = hintColor
             textColor = this@SearchBar.textColor
         }
 
-        search.textColor = btnColor
+        searchBtn?.textColor = btnColor
 
         inputUnderline.backgroundColor = dividerColor
 
@@ -72,13 +80,11 @@ class SearchBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         RxView.clicks(search)
             .throttleFirst(2L, TimeUnit.SECONDS)
             .subscribe {
-                val input = inputBar.editableText.toString().trim()
+                val input = inputView?.editableText.toString().trim()
                 block.invoke(input)
             }
         return this
     }
 
-    fun clear() {
-        inputBar.setText("")
-    }
+    fun getInput(): EditText = inputView!!
 }

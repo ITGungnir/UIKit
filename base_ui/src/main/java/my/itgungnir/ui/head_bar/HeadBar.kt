@@ -41,7 +41,7 @@ class HeadBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? =
 
         if (showDivider) {
             divider.visibility = View.VISIBLE
-            backgroundColor = dividerColor
+            divider.backgroundColor = dividerColor
         } else {
             divider.visibility = View.GONE
         }

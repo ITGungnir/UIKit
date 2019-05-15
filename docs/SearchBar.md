@@ -31,3 +31,4 @@
 searchBar.back("\ue720") { dismiss() }
     .doOnSearch { toast(it) }
 ```
+也可以通过`getInput()`方法获取到`SearchBar`中的输入框，从而进行动态的内容修改。
