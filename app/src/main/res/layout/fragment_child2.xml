@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:orientation="vertical">
 
     <my.itgungnir.ui.input.TextInput
@@ -54,5 +56,13 @@
         app:pb_disabledTextColor="@color/clr_text"
         app:pb_enabledColor="@color/colorAccent"
         app:pb_enabledTextColor="@color/clr_text" />
+
+    <TextView
+        android:id="@+id/richText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="@dimen/ui_kit_sp_text_size_3"
+        tools:ignore="SpUsage" />
 
 </LinearLayout>

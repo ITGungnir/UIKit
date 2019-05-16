@@ -14,6 +14,7 @@
 * [IconFont](./docs/IconFont.md)：一个可以展示`IconFont`字体的控件
 * [Input](./docs/Input.md)：一系列表单控件
 * [ListFooter](./docs/ListFooter.md)：用于为`RecyclerView`添加`加载更多`功能
+* [RichText](./docs/RichText.md)：用于方便快捷的展示富文本的控件
 * [SearchBar](./docs/SearchBar.md)：一个搜索栏控件
 * [StatusView](./docs/StatusView.md)：一个可以在不同状态下切换的控件
 
@@ -26,3 +27,6 @@ dependencies {
 }
 ```
 参考不同控件的相关文档，使用控件即可。
+
+## ToFix
+* HeadBar添加菜单功能

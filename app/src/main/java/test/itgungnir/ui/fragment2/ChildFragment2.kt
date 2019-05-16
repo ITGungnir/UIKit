@@ -1,6 +1,8 @@
 package test.itgungnir.ui.fragment2
 
+import android.graphics.Color
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +11,7 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_child2.*
+import my.itgungnir.ui.rich_text.RichText
 import org.jetbrains.anko.support.v4.toast
 import test.itgungnir.ui.R
 import java.util.concurrent.TimeUnit
@@ -39,6 +42,40 @@ class ChildFragment2 : Fragment() {
                         it.message?.let { msg -> toast(msg) }
                     })
             }
+        }
+
+        richText.apply {
+            // 如果富文本中包含了点击效果，则必须为TextView设置movementMethod
+            movementMethod = LinkMovementMethod.getInstance()
+            text = RichText()
+                .append("正常文本")
+                .append("改变背景色")
+                .backColor(Color.YELLOW)
+                .append("改变前景色")
+                .foreColor(Color.BLUE)
+                .append("删除线")
+                .middleLine()
+                .append("下划线")
+                .underLine()
+                .append("绝对字体")
+                .absoluteSize(25)
+                .append("相")
+                .relativeSize(1.5F)
+                .append("对")
+                .relativeSize(2.0F)
+                .append("字")
+                .relativeSize(2.5F)
+                .append("体")
+                .relativeSize(3.0F)
+                .append("加粗")
+                .bold()
+                .append("倾斜")
+                .italic()
+                .append("可以点击")
+                .onClick(Color.RED, true, false) { toast("点击了可点击的文本") }
+                .append("图片")
+                .image(context!!, R.mipmap.ic_launcher)
+                .create()
         }
     }
 }
