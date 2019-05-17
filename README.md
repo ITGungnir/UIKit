@@ -27,6 +27,3 @@ dependencies {
 }
 ```
 参考不同控件的相关文档，使用控件即可。
-
-## ToFix
-* HeadBar添加菜单功能
