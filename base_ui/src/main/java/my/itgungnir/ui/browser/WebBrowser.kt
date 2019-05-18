@@ -13,7 +13,11 @@ import kotlinx.android.synthetic.main.view_web_browser.view.*
 import my.itgungnir.ui.R
 
 @SuppressLint("SetJavaScriptEnabled")
-class WebBrowser @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+class WebBrowser @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) :
     ConstraintLayout(context, attrs, defStyleAttr) {
 
     private var browserView: WebView
@@ -32,14 +36,16 @@ class WebBrowser @JvmOverloads constructor(context: Context, attrs: AttributeSet
         browserView.apply {
             settings.apply {
                 javaScriptEnabled = true
-                blockNetworkImage = false
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
                 }
             }
             webViewClient = object : WebViewClient() {
                 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-                override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
+                override fun shouldOverrideUrlLoading(
+                    view: WebView,
+                    request: WebResourceRequest
+                ): Boolean {
                     view.loadUrl(request.url.toString())
                     return true
                 }
@@ -51,7 +57,11 @@ class WebBrowser @JvmOverloads constructor(context: Context, attrs: AttributeSet
                 }
 
                 @RequiresApi(Build.VERSION_CODES.M)
-                override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
+                override fun onReceivedError(
+                    view: WebView?,
+                    request: WebResourceRequest?,
+                    error: WebResourceError?
+                ) {
                     error?.let {
                         onErrorCallback?.invoke(it.errorCode, it.description.toString())
                     }
@@ -72,8 +82,11 @@ class WebBrowser @JvmOverloads constructor(context: Context, attrs: AttributeSet
         }
     }
 
-    fun load(url: String): WebBrowser {
-        browserView.loadUrl(url)
+    fun load(url: String, blockImage: Boolean = false): WebBrowser {
+        browserView.apply {
+            settings.blockNetworkImage = blockImage
+            loadUrl(url)
+        }
         return this
     }
 

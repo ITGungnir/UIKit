@@ -23,3 +23,8 @@ browser.load("https://www.baidu.com/")
     }
 ```
 **注意：** `WebBrowser`中进度条的颜色取决于系统配置的`colorAccent`颜色值。
+
+`WebBrowser`的`load()`方法支持两个参数，第二个参数可以指明是否支持无图模式，设置为`true`时，将不会加载页面中的图片：
+```kotlin
+browser.load("https://www.baidu.com/", true)
+```

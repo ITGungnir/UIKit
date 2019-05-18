@@ -33,7 +33,7 @@ class ChildFragment3 : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun loadSucceedPage(view: View) {
-        view.findViewById<WebBrowser>(R.id.browser).load("https://www.baidu.com/")
+        view.findViewById<WebBrowser>(R.id.browser).load("https://www.baidu.com/", true)
             .onError { code, msg ->
                 statusView.failed { view ->
                     view.findViewById<TextView>(R.id.errorMsg).text = "$code：$msg"
