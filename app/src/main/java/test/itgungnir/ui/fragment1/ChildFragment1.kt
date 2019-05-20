@@ -1,5 +1,6 @@
 package test.itgungnir.ui.fragment1
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
@@ -68,6 +69,7 @@ class ChildFragment1 : BaseFragment() {
                 // List Footer
                 footer = ListFooter.Builder()
                     .bindTo(list)
+                    .render(Color.BLACK, Color.WHITE)
                     .doOnLoadMore {
                         if (!refreshLayout().isRefreshing) {
                             viewModel.loadMoreDataList()

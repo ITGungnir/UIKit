@@ -9,6 +9,8 @@ private var footer: ListFooter? = null
 footer = ListFooter.Builder()
     // 绑定到一个RecyclerView
     .bindTo(list)
+    // 设置Footer的背景颜色和文本颜色
+    .render(Color.BLACK, Color.WHITE)
     // 加载更多的回调
     .doOnLoadMore { }
     .build()

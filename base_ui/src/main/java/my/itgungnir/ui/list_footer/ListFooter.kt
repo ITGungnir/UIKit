@@ -5,7 +5,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 @Suppress("JoinDeclarationAndAssignment")
-class ListFooter(private val recyclerView: RecyclerView, private val loadMore: () -> Unit) {
+class ListFooter(
+    private val recyclerView: RecyclerView,
+    private val loadMore: () -> Unit,
+    colorPair: Pair<Int, Int>
+) {
 
     private var listAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
 
@@ -15,15 +19,11 @@ class ListFooter(private val recyclerView: RecyclerView, private val loadMore: (
 
     private var hasMore = false
 
-    private constructor(builder: Builder) : this(builder.recyclerView, builder.listener)
+    private constructor(builder: Builder) : this(builder.recyclerView, builder.listener, builder.colorPair)
 
     init {
         listAdapter = recyclerView.adapter!!
-        footerAdapter =
-            FooterAdapter(
-                listAdapter,
-                FooterStatus.Status.SUCCEED
-            )
+        footerAdapter = FooterAdapter(listAdapter, FooterStatus.Status.SUCCEED, colorPair)
         listAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() =
                 footerAdapter.notifyDataSetChanged()
@@ -100,11 +100,18 @@ class ListFooter(private val recyclerView: RecyclerView, private val loadMore: (
         lateinit var recyclerView: RecyclerView
             private set
 
+        lateinit var colorPair: Pair<Int, Int>
+            private set
+
         lateinit var listener: () -> Unit
             private set
 
         fun bindTo(recyclerView: RecyclerView) = apply {
             this.recyclerView = recyclerView
+        }
+
+        fun render(bgColor: Int, textColor: Int) = apply {
+            this.colorPair = bgColor to textColor
         }
 
         fun doOnLoadMore(listener: () -> Unit) = apply {

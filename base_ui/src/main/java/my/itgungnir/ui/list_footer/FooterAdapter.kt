@@ -6,10 +6,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import my.itgungnir.ui.R
+import org.jetbrains.anko.backgroundColor
+import org.jetbrains.anko.textColor
 
 class FooterAdapter(
     private val adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>,
-    private var status: FooterStatus.Status
+    private var status: FooterStatus.Status,
+    private var colorPair: Pair<Int, Int>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount(): Int = if (adapter.itemCount > 0) {
@@ -77,6 +80,8 @@ class FooterAdapter(
 
         fun applyStatus(status: FooterStatus.Status) {
             title.text = status.title
+            title.backgroundColor = colorPair.first
+            title.textColor = colorPair.second
             itemView.invalidate()
         }
     }
