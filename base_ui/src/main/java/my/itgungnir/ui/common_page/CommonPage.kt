@@ -1,6 +1,7 @@
 package my.itgungnir.ui.common_page
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.util.AttributeSet
 import android.view.View
@@ -38,7 +39,7 @@ class CommonPage @JvmOverloads constructor(context: Context, attrs: AttributeSet
         }
 
         fab.apply {
-            backgroundColor = fabBackColor
+            backgroundTintList = ColorStateList.valueOf(fabBackColor)
             rippleColor = fabRippleColor
             imageResource = fabSrc
             setOnClickListener {
