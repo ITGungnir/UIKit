@@ -67,7 +67,7 @@ class EasyAdapter(private val recyclerView: RecyclerView, private val diffAnalyz
     override fun onViewDetachedFromWindow(holder: VH) =
         bindMap.first { it.type == holder.itemViewType }.delegate.onViewDetachedFromWindow(holder)
 
-    fun map(isForViewType: (data: ListItem) -> Boolean, delegate: Delegate): EasyAdapter {
+    fun addDelegate(isForViewType: (data: ListItem) -> Boolean, delegate: Delegate): EasyAdapter {
         bindMap.add(BindMap(bindMap.count(), isForViewType, delegate))
         recyclerView.adapter = this
         return this

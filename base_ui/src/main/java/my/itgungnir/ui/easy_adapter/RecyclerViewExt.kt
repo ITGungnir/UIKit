@@ -18,7 +18,7 @@ fun RecyclerView.bind(
 ): EasyAdapter {
     layoutManager = manager
     return EasyAdapter(recyclerView = this, diffAnalyzer = diffAnalyzer)
-        .map(isForViewType = { true }, delegate = delegate)
+        .addDelegate(isForViewType = { true }, delegate = delegate)
 }
 
 @Suppress("UNCHECKED_CAST")

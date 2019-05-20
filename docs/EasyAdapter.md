@@ -18,7 +18,7 @@ fun RecyclerView.bind(
     return EasyAdapter(recyclerView = this, diffAnalyzer = diffAnalyzer)
 }
 ```
-上述方法用于绑定多种`Delegate`（`viewType`），后续可以通过`map()`方法添加`Delegate`。
+上述方法用于绑定多种`Delegate`（`viewType`），后续可以通过`addDelegate()`方法添加`Delegate`。
 ```kotlin
 fun RecyclerView.bind(
     manager: RecyclerView.LayoutManager = LinearLayoutManager(context),
@@ -27,7 +27,7 @@ fun RecyclerView.bind(
 ): EasyAdapter {
     layoutManager = manager
     return EasyAdapter(recyclerView = this, diffAnalyzer = diffAnalyzer)
-        .map(isForViewType = { true }, delegate = delegate)
+        .addDelegate(isForViewType = { true }, delegate = delegate)
 }
 ```
 上述方法用于绑定单一的`Delegate`。
@@ -58,10 +58,10 @@ listAdapter = list.bind(
             return if (bundle.isEmpty) null else bundle
         }
     })
-    .map({ data -> data is ChildState.BannerVO }, BannerDelegate())
-    .map({ data -> data is ChildState.TextVO }, TextDelegate())
+    .addDelegate({ data -> data is ChildState.BannerVO }, BannerDelegate())
+    .addDelegate({ data -> data is ChildState.TextVO }, TextDelegate())
 ```
-`map()`方法中有两个参数，第一个参数是判定条件，即符合特定条件的数据才能展示为特定的`Delegate`；第二个参数是具体的`Delegate`对象。
+`addDelegate()`方法中有两个参数，第一个参数是判定条件，即符合特定条件的数据才能展示为特定的`Delegate`；第二个参数是具体的`Delegate`对象。
 
 ## 2、Differ
 `Differ`是对`DiffUtil.DiffCallback`的封装，使之可以用于`EasyAdapter`中数据的局部更新判定。

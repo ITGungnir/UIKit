@@ -64,8 +64,8 @@ class ChildFragment1 : BaseFragment() {
                             }
                             return if (bundle.isEmpty) null else bundle
                         }
-                    }).map({ data -> data is ChildState.BannerVO }, BannerDelegate())
-                    .map({ data -> data is ChildState.TextVO }, TextDelegate())
+                    }).addDelegate({ data -> data is ChildState.BannerVO }, BannerDelegate())
+                    .addDelegate({ data -> data is ChildState.TextVO }, TextDelegate())
                 // List Footer
                 footer = ListFooter.Builder()
                     .bindTo(list)
