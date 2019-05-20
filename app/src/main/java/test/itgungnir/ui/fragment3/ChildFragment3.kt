@@ -1,6 +1,7 @@
 package test.itgungnir.ui.fragment3
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -33,13 +34,16 @@ class ChildFragment3 : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun loadSucceedPage(view: View) {
-        view.findViewById<WebBrowser>(R.id.browser).load("https://www.baidu.com/", true)
-            .onError { code, msg ->
-                statusView.failed { view ->
-                    view.findViewById<TextView>(R.id.errorMsg).text = "$code：$msg"
-                    view.findViewById<ProgressButton>(R.id.reload).ready("重新加载")
+        view.findViewById<WebBrowser>(R.id.browser).apply {
+            load("https://www.baidu.com/", false)
+                .onError { code, msg ->
+                    statusView.failed { view ->
+                        view.findViewById<TextView>(R.id.errorMsg).text = "$code：$msg"
+                        view.findViewById<ProgressButton>(R.id.reload).ready("重新加载")
+                    }
                 }
-            }
+            mask(Color.parseColor("#44000000"))
+        }
     }
 
     private fun loadFailedPage(view: View) {

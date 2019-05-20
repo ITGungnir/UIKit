@@ -11,6 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.android.synthetic.main.view_web_browser.view.*
 import my.itgungnir.ui.R
+import org.jetbrains.anko.backgroundColor
 
 @SuppressLint("SetJavaScriptEnabled")
 class WebBrowser @JvmOverloads constructor(
@@ -36,6 +37,14 @@ class WebBrowser @JvmOverloads constructor(
         browserView.apply {
             settings.apply {
                 javaScriptEnabled = true
+                // 支持手势缩放
+                setSupportZoom(true)
+                builtInZoomControls = true
+                displayZoomControls = false
+                useWideViewPort = true
+                layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN
+                loadWithOverviewMode = true
+                // 显示图片
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
                 }
@@ -92,5 +101,15 @@ class WebBrowser @JvmOverloads constructor(
 
     fun onError(block: (Int, String) -> Unit) {
         this.onErrorCallback = block
+    }
+
+    /**
+     * 在页面上加一层遮盖
+     */
+    fun mask(maskColor: Int) {
+        mask.apply {
+            visibility = View.VISIBLE
+            backgroundColor = maskColor
+        }
     }
 }

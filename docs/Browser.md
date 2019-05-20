@@ -28,3 +28,8 @@ browser.load("https://www.baidu.com/")
 ```kotlin
 browser.load("https://www.baidu.com/", true)
 ```
+`WebBrowser`同时提供了一个`mask()`方法，可以应用于主题切换（如夜间模式）中：
+```kotlin
+browser.mask(Color.parseColor("#44000000"))
+```
+上述代码用于在`WebView`上层添加一层遮罩，建议设置为半透明色；如果不写这行代码，则`WebView`上不会添加任何遮罩层。
