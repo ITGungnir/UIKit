@@ -1,115 +1,60 @@
 package my.itgungnir.ui.browser
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
-import android.os.Build
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
-import android.webkit.*
-import android.widget.ProgressBar
-import androidx.annotation.RequiresApi
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.webkit.WebSettings
+import android.widget.FrameLayout
+import android.widget.LinearLayout
+import com.just.agentweb.AgentWeb
 import kotlinx.android.synthetic.main.view_web_browser.view.*
 import my.itgungnir.ui.R
-import org.jetbrains.anko.backgroundColor
 
 @SuppressLint("SetJavaScriptEnabled")
-class WebBrowser @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
-) :
-    ConstraintLayout(context, attrs, defStyleAttr) {
+class WebBrowser @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+    FrameLayout(context, attrs, defStyleAttr) {
 
-    private var browserView: WebView
+    private var containerView: FrameLayout
 
-    private var progressView: ProgressBar
-
-    private var onErrorCallback: ((Int, String) -> Unit)? = null
+    private lateinit var agentWeb: AgentWeb
 
     init {
 
         View.inflate(context, R.layout.view_web_browser, this)
 
-        browserView = webView
-        progressView = progressBar
+        this.containerView = webContainer
+    }
 
-        browserView.apply {
+    fun load(url: String, blockImage: Boolean = false, errorLayoutId: Int, errorCallback: (View) -> Unit) {
+
+        val errorView = LayoutInflater.from(context).inflate(errorLayoutId, this, false).apply {
+            errorCallback.invoke(this)
+        }
+
+        agentWeb = AgentWeb.with(context as Activity)
+            .setAgentWebParent(webContainer, LinearLayout.LayoutParams(-1, -1))
+            .useDefaultIndicator()
+            .setMainFrameErrorView(errorView)
+            .createAgentWeb()
+            .ready()
+            .go(url)
+
+        agentWeb.webCreator.webView.apply {
             settings.apply {
                 javaScriptEnabled = true
-                // 支持手势缩放
                 setSupportZoom(true)
                 builtInZoomControls = true
                 displayZoomControls = false
                 useWideViewPort = true
-                layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN
                 loadWithOverviewMode = true
-                // 显示图片
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
-                }
-            }
-            webViewClient = object : WebViewClient() {
-                @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-                override fun shouldOverrideUrlLoading(
-                    view: WebView,
-                    request: WebResourceRequest
-                ): Boolean {
-                    view.loadUrl(request.url.toString())
-                    return true
-                }
-
-                @Suppress("OverridingDeprecatedMember")
-                override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-                    view.loadUrl(url)
-                    return true
-                }
-
-                @RequiresApi(Build.VERSION_CODES.M)
-                override fun onReceivedError(
-                    view: WebView?,
-                    request: WebResourceRequest?,
-                    error: WebResourceError?
-                ) {
-                    error?.let {
-                        onErrorCallback?.invoke(it.errorCode, it.description.toString())
-                    }
-                    super.onReceivedError(view, request, error)
-                }
-            }
-            webChromeClient = object : WebChromeClient() {
-                override fun onProgressChanged(view: WebView?, newProgress: Int) {
-                    progressView.apply {
-                        progress = newProgress
-                        visibility = when (newProgress) {
-                            100 -> View.GONE
-                            else -> View.VISIBLE
-                        }
-                    }
-                }
+                layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN
+                blockNetworkImage = blockImage
             }
         }
     }
 
-    fun load(url: String, blockImage: Boolean = false): WebBrowser {
-        browserView.apply {
-            settings.blockNetworkImage = blockImage
-            loadUrl(url)
-        }
-        return this
-    }
-
-    fun onError(block: (Int, String) -> Unit) {
-        this.onErrorCallback = block
-    }
-
-    /**
-     * 在页面上加一层遮盖
-     */
-    fun mask(maskColor: Int) {
-        mask.apply {
-            visibility = View.VISIBLE
-            backgroundColor = maskColor
-        }
-    }
+    fun goBack() = agentWeb.back()
 }

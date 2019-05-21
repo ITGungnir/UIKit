@@ -1,35 +1,50 @@
 # UIKit - Browser
 
-`WebBrowser`是一个带进度条的网页加载和展示控件。
+`WebBrowser`是一个带进度条的网页加载和展示控件，支持`错误回调`、`页内回退`、`阻绝图片加载`等功能。
+
+## 0、准备
+如果要使用`WebBrowser`控件，需要先在项目的`AndroidManifest.xml`文件中添加权限：
+```xml
+<manifest>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Your codes -->
+</manifest>
+```
 
 ## 1、布局
 ```xml
 <my.itgungnir.ui.browser.WebBrowser
-    android:id="@+id/browser"
+    android:id="@+id/browserView"
     android:layout_width="match_parent"
     android:layout_height="match_parent" />
 ```
 
 ## 2、使用
+### （1）加载网页
 ```kotlin
-// load()：设置要加载的网页URL
-browser.load("https://www.baidu.com/")
-    // onError()：加载网页失败时的回调方法，提供错误码code和错误信息msg
-    .onError { code, msg ->
-        statusView.failed { view ->
-            view.findViewById<TextView>(R.id.errorMsg).text = "$code：$msg"
-            view.findViewById<ProgressButton>(R.id.reload).ready("重新加载")
-        }
+browserView.load(
+    // url：要加载的网页URL
+    url = "https://bugly.qq.com/v2/index",
+    // blockImage：是否要阻绝图片加载，置为true时将不加载网页中的图片
+    blockImage = false,
+    // errorLayoutId：当页面发生错误时，显示的布局
+    errorLayoutId = R.layout.status_view_error,
+    // errorCallback：对错误布局的渲染
+    errorCallback = {
+        it.findViewById<TextView>(R.id.errorMsg).text = "页面加载时出现问题，请重试~"
+        it.findViewById<ProgressButton>(R.id.reload).ready("重新加载")
     }
+)
 ```
 **注意：** `WebBrowser`中进度条的颜色取决于系统配置的`colorAccent`颜色值。
 
-`WebBrowser`的`load()`方法支持两个参数，第二个参数可以指明是否支持无图模式，设置为`true`时，将不会加载页面中的图片：
+### （2）页内回退
+`WebBrowser`控件提供了一个`goBack()`方法，支持页内回退，当该方法返回为`true`时，表示前面仍有其他页面可以回退，否则表示当前页已位于栈底。示例代码如下：
 ```kotlin
-browser.load("https://www.baidu.com/", true)
+override fun onBackPressed() {
+    if (!browserView.goBack()) {
+        super.onBackPressed()
+    }
+}
 ```
-`WebBrowser`同时提供了一个`mask()`方法，可以应用于主题切换（如夜间模式）中：
-```kotlin
-browser.mask(Color.parseColor("#44000000"))
-```
-上述代码用于在`WebView`上层添加一层遮罩，建议设置为半透明色；如果不写这行代码，则`WebView`上不会添加任何遮罩层。

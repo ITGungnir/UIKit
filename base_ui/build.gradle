@@ -38,4 +38,5 @@ dependencies {
     implementation "com.jakewharton.rxbinding2:rxbinding:$rxbinding_version"
     // Widgets
     implementation "com.google.android:flexbox:$flex_version"
+    implementation "com.just.agentweb:agentweb:$agent_web_version"
 }

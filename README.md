@@ -28,6 +28,14 @@ dependencies {
     api "com.github.ITGungnir:UIKit:$uikit_version"
 }
 ```
+**注意：** 如果要使用`WebBrowser`控件，需要先在项目的`AndroidManifest.xml`文件中添加相关权限：
+```xml
+<manifest>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Your codes -->
+</manifest>
+```
 参考不同控件的相关文档，使用控件即可。
 
 ## License

@@ -19,6 +19,7 @@ ext {
     rxbinding_version = '2.2.0'
     // Widgets
     flex_version = '1.0.0'
+    agent_web_version = '4.0.2'
     // Tools
     jitpack_version = '2.1'
     rxmvvm_version = '1.1.6'
