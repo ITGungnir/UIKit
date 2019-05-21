@@ -1,6 +1,7 @@
 package test.itgungnir.ui.fragment3
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -33,6 +34,7 @@ class ChildFragment3 : Fragment() {
         browserView.load(
             url = "https://bugly.qq.com/v2/index",
             blockImage = false,
+            indicatorColor = Color.YELLOW,
             errorLayoutId = R.layout.status_view_error,
             errorCallback = {
                 it.findViewById<TextView>(R.id.errorMsg).text = "页面加载时出现问题，请重试~"

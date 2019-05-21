@@ -28,7 +28,13 @@ class WebBrowser @JvmOverloads constructor(context: Context, attrs: AttributeSet
         this.containerView = webContainer
     }
 
-    fun load(url: String, blockImage: Boolean = false, errorLayoutId: Int, errorCallback: (View) -> Unit) {
+    fun load(
+        url: String,
+        blockImage: Boolean = false,
+        indicatorColor: Int,
+        errorLayoutId: Int,
+        errorCallback: (View) -> Unit
+    ) {
 
         val errorView = LayoutInflater.from(context).inflate(errorLayoutId, this, false).apply {
             errorCallback.invoke(this)
@@ -36,7 +42,7 @@ class WebBrowser @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
         agentWeb = AgentWeb.with(context as Activity)
             .setAgentWebParent(webContainer, LinearLayout.LayoutParams(-1, -1))
-            .useDefaultIndicator()
+            .useDefaultIndicator(indicatorColor)
             .setMainFrameErrorView(errorView)
             .createAgentWeb()
             .ready()

@@ -28,6 +28,8 @@ browserView.load(
     url = "https://bugly.qq.com/v2/index",
     // blockImage：是否要阻绝图片加载，置为true时将不加载网页中的图片
     blockImage = false,
+    // indicatorColor：进度条的颜色
+    indicatorColor = Color.YELLOW,
     // errorLayoutId：当页面发生错误时，显示的布局
     errorLayoutId = R.layout.status_view_error,
     // errorCallback：对错误布局的渲染
@@ -37,7 +39,6 @@ browserView.load(
     }
 )
 ```
-**注意：** `WebBrowser`中进度条的颜色取决于系统配置的`colorAccent`颜色值。
 
 ### （2）页内回退
 `WebBrowser`控件提供了一个`goBack()`方法，支持页内回退，当该方法返回为`true`时，表示前面仍有其他页面可以回退，否则表示当前页已位于栈底。示例代码如下：
