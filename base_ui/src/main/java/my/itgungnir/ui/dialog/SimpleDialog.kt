@@ -21,6 +21,16 @@ class SimpleDialog(
     private val onCancel: (() -> Unit)? = null
 ) : DialogFragment() {
 
+    constructor() : this(
+        bgColor = Color.WHITE,
+        msgColor = Color.GRAY,
+        dividerColor = Color.LTGRAY,
+        btnColor = Color.DKGRAY,
+        msg = "",
+        onConfirm = null,
+        onCancel = null
+    )
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         inflater.inflate(R.layout.view_simple_dialog, container, false)
 
