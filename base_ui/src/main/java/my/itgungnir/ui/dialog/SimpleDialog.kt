@@ -11,25 +11,30 @@ import my.itgungnir.ui.R
 import org.jetbrains.anko.backgroundColor
 import org.jetbrains.anko.textColor
 
-class SimpleDialog(
-    private val bgColor: Int = Color.WHITE,
-    private val msgColor: Int = Color.GRAY,
-    private val dividerColor: Int = Color.LTGRAY,
-    private val btnColor: Int = Color.DKGRAY,
-    private val msg: String,
-    private val onConfirm: (() -> Unit)? = null,
-    private val onCancel: (() -> Unit)? = null
-) : DialogFragment() {
+class SimpleDialog : DialogFragment() {
 
-    constructor() : this(
-        bgColor = Color.WHITE,
-        msgColor = Color.GRAY,
-        dividerColor = Color.LTGRAY,
-        btnColor = Color.DKGRAY,
-        msg = "",
-        onConfirm = null,
-        onCancel = null
-    )
+    private var bgColor: Int = Color.WHITE
+    private var msgColor: Int = Color.GRAY
+    private var dividerColor: Int = Color.LTGRAY
+    private var btnColor: Int = Color.DKGRAY
+    private var msg: String = ""
+    private var onConfirm: (() -> Unit)? = null
+    private var onCancel: (() -> Unit)? = null
+
+    companion object {
+        fun newInstance(
+            bgColor: Int, msgColor: Int, dividerColor: Int, btnColor: Int, msg: String,
+            onConfirm: (() -> Unit)?, onCancel: (() -> Unit)?
+        ) = SimpleDialog().apply {
+            this.bgColor = bgColor
+            this.msgColor = msgColor
+            this.dividerColor = dividerColor
+            this.btnColor = btnColor
+            this.msg = msg
+            this.onConfirm = onConfirm
+            this.onCancel = onCancel
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         inflater.inflate(R.layout.view_simple_dialog, container, false)

@@ -68,7 +68,7 @@ SearchDialog().show(supportFragmentManager, SearchDialog::class.java.name)
 # 2、SimpleDialog
 `SimpleDialog`是一种类似`iOS`系统中默认对话框的效果，仅有一个消息文本、一个`取消`按钮和一个`确定`按钮：
 ```kotlin
-SimpleDialog(
+SimpleDialog.newInstance(
     // bgColor：对话框的背景颜色
     bgColor = Color.parseColor(COLOR_DIALOG_BG),
     // msgColor：对话框中消息文本的颜色

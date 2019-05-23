@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         headBar.title("Test UIKit")
             .back("\ue720") { finish() }
             .addToolButton("\ue834") {
-                SimpleDialog(
+                SimpleDialog.newInstance(
                     bgColor = Color.parseColor(COLOR_DIALOG_BG),
                     msgColor = Color.parseColor(COLOR_DIALOG_MSG),
                     dividerColor = Color.parseColor(COLOR_DIVIDER),
