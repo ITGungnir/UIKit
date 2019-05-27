@@ -5,7 +5,7 @@
 ![](https://img.shields.io/badge/Email-itgungnir@163.com-ff69b4.svg)
 
 `UIKit`是一个控件库，其中提供的控件及文档如下：
-* [Banner](./docs/Banner.md)：一个可以自动无限循环滚动的控件
+* [Banner](./docs/Banner.md)：一个可以自动无限循环滚动的控件，可自定义设置自动滚动和无限滚动
 * [BottomTab](./docs/BottomTab.md)：一个底部导航栏控件
 * [Browser](./docs/Browser.md)：一个带进度条的网页加载和展示控件
 * [CommonPage](./docs/CommonPage.md)：一个通用页面
@@ -15,7 +15,7 @@
 * [HeadBar](./docs/HeadBar.md)：一个自定义封装的标题栏控件
 * [IconFont](./docs/IconFont.md)：一个可以展示`IconFont`字体的控件
 * [Input](./docs/Input.md)：一系列表单控件
-* [ListFooter](./docs/ListFooter.md)：用于为`RecyclerView`添加`加载更多`功能
+* [ListFooter](./docs/ListFooter.md)：用于为`RecyclerView`添加`加载更多`功能，可以自定义样式
 * [RichText](./docs/RichText.md)：用于方便快捷的展示富文本的控件
 * [SearchBar](./docs/SearchBar.md)：一个搜索栏控件
 * [StatusView](./docs/StatusView.md)：一个可以在不同状态下切换的控件
@@ -39,7 +39,6 @@ dependencies {
 参考不同控件的相关文档，使用控件即可。
 
 ## ToFix
-* ListFooter：自定义布局，响应式设置状态
 * EasyAdapter：简化API
 * HeadBar：支持工具按钮收缩
 * WebBrowser：支持文件下载、提供获取当前页标题和URL的接口

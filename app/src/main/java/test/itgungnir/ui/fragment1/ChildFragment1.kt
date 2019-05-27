@@ -1,7 +1,9 @@
 package test.itgungnir.ui.fragment1
 
-import android.graphics.Color
 import android.os.Bundle
+import android.view.View
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_child1.*
@@ -11,6 +13,7 @@ import my.itgungnir.ui.easy_adapter.Differ
 import my.itgungnir.ui.easy_adapter.EasyAdapter
 import my.itgungnir.ui.easy_adapter.ListItem
 import my.itgungnir.ui.easy_adapter.bind
+import my.itgungnir.ui.list_footer.FooterStatus
 import my.itgungnir.ui.list_footer.ListFooter
 import my.itgungnir.ui.status_view.StatusView
 import org.jetbrains.anko.support.v4.toast
@@ -69,7 +72,31 @@ class ChildFragment1 : BaseFragment() {
                 // List Footer
                 footer = ListFooter.Builder()
                     .bindTo(list)
-                    .render(Color.BLACK, Color.WHITE)
+                    .render(R.layout.view_list_footer) { view, status ->
+                        val title = view.findViewById<TextView>(R.id.title)
+                        val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
+                        when (status) {
+                            FooterStatus.Status.PROGRESSING -> {
+                                title.visibility = View.GONE
+                                progressBar.visibility = View.VISIBLE
+                            }
+                            FooterStatus.Status.SUCCEED -> {
+                                title.visibility = View.VISIBLE
+                                progressBar.visibility = View.GONE
+                                title.text = "加载成功，还有更多哦~"
+                            }
+                            FooterStatus.Status.NO_MORE -> {
+                                title.visibility = View.VISIBLE
+                                progressBar.visibility = View.GONE
+                                title.text = "加载成功，但我是有底线的"
+                            }
+                            FooterStatus.Status.FAILED -> {
+                                title.visibility = View.VISIBLE
+                                progressBar.visibility = View.GONE
+                                title.text = "啊嘞？怎么出错了！？"
+                            }
+                        }
+                    }
                     .doOnLoadMore {
                         if (!refreshLayout().isRefreshing) {
                             viewModel.loadMoreDataList()

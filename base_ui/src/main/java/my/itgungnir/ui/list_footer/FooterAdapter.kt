@@ -6,13 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import my.itgungnir.ui.R
-import org.jetbrains.anko.backgroundColor
-import org.jetbrains.anko.textColor
 
 class FooterAdapter(
     private val adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>,
     private var status: FooterStatus.Status,
-    private var colorPair: Pair<Int, Int>
+    private var renderPair: Pair<Int, (View, FooterStatus.Status) -> Unit>? = null
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount(): Int = if (adapter.itemCount > 0) {
@@ -35,7 +33,7 @@ class FooterAdapter(
             Int.MAX_VALUE ->
                 FooterViewHolder(
                     LayoutInflater.from(parent.context).inflate(
-                        R.layout.view_list_footer, parent, false
+                        renderPair?.first ?: R.layout.view_uikit_list_footer, parent, false
                     )
                 )
             else ->
@@ -67,21 +65,24 @@ class FooterAdapter(
     }
 
     fun notifyStatusChanged(status: FooterStatus.Status) {
-        if (this.status == status) {
-            return
-        } else {
-            this.status = status
-        }
+        this.status = status
         this.notifyDataSetChanged()
     }
 
     inner class FooterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val title = itemView.findViewById<TextView>(R.id.title)!!
-
         fun applyStatus(status: FooterStatus.Status) {
-            title.text = status.title
-            title.backgroundColor = colorPair.first
-            title.textColor = colorPair.second
+            if (renderPair == null) {
+                itemView.findViewById<TextView>(R.id.title)?.apply {
+                    text = when (status) {
+                        FooterStatus.Status.PROGRESSING -> "正在加载..."
+                        FooterStatus.Status.NO_MORE -> "没有更多数据了"
+                        FooterStatus.Status.SUCCEED -> "加载成功"
+                        FooterStatus.Status.FAILED -> "加载失败"
+                    }
+                }
+            } else {
+                renderPair?.second?.invoke(itemView, status)
+            }
             itemView.invalidate()
         }
     }

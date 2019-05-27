@@ -1,5 +1,6 @@
 package my.itgungnir.ui.list_footer
 
+import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -8,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 class ListFooter(
     private val recyclerView: RecyclerView,
     private val loadMore: () -> Unit,
-    colorPair: Pair<Int, Int>
+    renderPair: Pair<Int, (View, FooterStatus.Status) -> Unit>? = null
 ) {
 
     private var listAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
@@ -19,11 +20,11 @@ class ListFooter(
 
     private var hasMore = false
 
-    private constructor(builder: Builder) : this(builder.recyclerView, builder.listener, builder.colorPair)
+    private constructor(builder: Builder) : this(builder.recyclerView, builder.listener, builder.renderPair)
 
     init {
         listAdapter = recyclerView.adapter!!
-        footerAdapter = FooterAdapter(listAdapter, FooterStatus.Status.SUCCEED, colorPair)
+        footerAdapter = FooterAdapter(listAdapter, FooterStatus.Status.SUCCEED, renderPair)
         listAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() =
                 footerAdapter.notifyDataSetChanged()
@@ -100,7 +101,7 @@ class ListFooter(
         lateinit var recyclerView: RecyclerView
             private set
 
-        lateinit var colorPair: Pair<Int, Int>
+        var renderPair: Pair<Int, (View, FooterStatus.Status) -> Unit>? = null
             private set
 
         lateinit var listener: () -> Unit
@@ -110,8 +111,8 @@ class ListFooter(
             this.recyclerView = recyclerView
         }
 
-        fun render(bgColor: Int, textColor: Int) = apply {
-            this.colorPair = bgColor to textColor
+        fun render(layoutId: Int, statusCallback: (View, FooterStatus.Status) -> Unit) = apply {
+            this.renderPair = layoutId to statusCallback
         }
 
         fun doOnLoadMore(listener: () -> Unit) = apply {
