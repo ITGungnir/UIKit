@@ -22,17 +22,24 @@ class ChildFragment3 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        backButton.apply {
+//            ready("Go Back")
+//            setOnClickListener {
+//                if (!browserView.goBack()) {
+//                    toast("Back stack empty.")
+//                }
+//            }
+//        }
+
         backButton.apply {
-            ready("Go Back")
+            ready("Log")
             setOnClickListener {
-                if (!browserView.goBack()) {
-                    toast("Back stack empty.")
-                }
+                toast("${browserView.currentTitle()}--->>${browserView.currentUrl()}")
             }
         }
 
         browserView.load(
-            url = "https://bugly.qq.com/v2/index",
+            url = "https://www.wanandroid.com/blog/show/2575",
             blockImage = false,
             indicatorColor = Color.YELLOW,
             errorLayoutId = R.layout.status_view_error,

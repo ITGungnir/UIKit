@@ -63,4 +63,8 @@ class WebBrowser @JvmOverloads constructor(context: Context, attrs: AttributeSet
     }
 
     fun goBack() = agentWeb.back()
+
+    fun currentTitle(): String = agentWeb.webCreator.webView.title
+
+    fun currentUrl(): String = agentWeb.webCreator.webView.url
 }

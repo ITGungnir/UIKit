@@ -49,3 +49,10 @@ override fun onBackPressed() {
     }
 }
 ```
+
+### （3）当前信息
+`WebBrowser`提供了两个方法用于获取当前页面的信息：
+```kotlin
+browserView.currentTitle() // 获取当前正在访问的页面的标题
+browserView.currentUrl()   // 获取当前正在访问的页面的URL
+```
