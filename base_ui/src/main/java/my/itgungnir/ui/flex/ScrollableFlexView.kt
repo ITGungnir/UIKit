@@ -33,7 +33,7 @@ class ScrollableFlexView @JvmOverloads constructor(
 
     @Suppress("UNCHECKED_CAST")
     fun <T : ListItem> bind(layoutId: Int, render: (view: View, data: T) -> Unit) {
-        bind(manager = manager, delegate = FlexDelegate(layoutId, render))
+        bind(manager = manager).addDelegate(isForViewType = { true }, delegate = FlexDelegate(layoutId, render))
     }
 
     fun <T : ListItem> refresh(items: List<T>) {

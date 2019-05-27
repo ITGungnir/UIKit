@@ -39,7 +39,7 @@ dependencies {
 参考不同控件的相关文档，使用控件即可。
 
 ## ToFix
-* EasyAdapter：简化API
+* FlexView、ScrollableFlexView：可以自定义纵横间隔
 * HeadBar：支持工具按钮收缩
 * WebBrowser：支持文件下载、提供获取当前页标题和URL的接口
 * CommonPage：FAB点击消失
