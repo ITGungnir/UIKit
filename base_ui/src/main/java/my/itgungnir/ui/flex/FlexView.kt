@@ -1,17 +1,24 @@
 package my.itgungnir.ui.flex
 
 import android.content.Context
+import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayout
+import my.itgungnir.ui.R
 
 class FlexView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
     FlexboxLayout(context, attrs, defStyleAttr) {
 
+    private var horizontalSpacing: Float = dp2px(10.0F)
+    private var verticalSpacing: Float = dp2px(10.0F)
+
     private var layoutId: Int? = null
+
     private var render: ((View, Any) -> Unit)? = null
 
     private val inflater by lazy { LayoutInflater.from(context) }
@@ -20,8 +27,16 @@ class FlexView @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         flexDirection = FlexDirection.ROW
         flexWrap = FlexWrap.WRAP
 
+        context.obtainStyledAttributes(attrs, R.styleable.FlexView).apply {
+            horizontalSpacing = getDimension(R.styleable.FlexView_fv_horizontalSpacing, horizontalSpacing)
+            verticalSpacing = getDimension(R.styleable.FlexView_fv_verticalSpacing, verticalSpacing)
+            recycle()
+        }
+
         setShowDivider(SHOW_DIVIDER_MIDDLE)
-        setDividerDrawable(FlexDividerDrawable(context))
+        setDividerDrawable(GradientDrawable().apply {
+            setSize(horizontalSpacing.toInt(), verticalSpacing.toInt())
+        })
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -43,4 +58,7 @@ class FlexView @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
             this.addView(view)
         }
     }
+
+    private fun dp2px(dp: Float): Float =
+        TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.displayMetrics)
 }

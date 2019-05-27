@@ -19,7 +19,9 @@ implementation "com.google.android:flexbox:$flex_version"
     android:layout_marginStart="10dp"
     android:layout_marginTop="10dp"
     android:layout_marginEnd="10dp"
-    android:layout_marginBottom="10dp" />
+    android:layout_marginBottom="10dp"
+    app:sfv_horizontalSpacing="20dp"
+    app:sfv_verticalSpacing="5dp" />
 ```
 `FlexView`的使用分为`bind`和`refresh`两个步骤：
 ```kotlin
@@ -37,6 +39,19 @@ childrenView.bind<TreeState.TreeVO.TreeTagVO>(
 // refresh()方法应在onBindView()等方法中执行
 childrenView.refresh(item.children)
 ```
+`FlexView`中提供了以下两个自定义属性，用来设置横向和纵向item之间的间隔：
+
+|名称|含义|默认值|
+|---|---|---|
+|app:fv_horizontalSpacing|item之间的横向间隔|10dp|
+|app:fv_verticalSpacing|item之间的纵向间隔|10dp|
 
 ## 2、ScrollableFlexView
 `ScrollableFlexView`与`FlexView`类似，但可以滚动，其用法与`FlexView`完全相同。
+
+`ScrollableFlexView`中也提供了设置横向和纵向item之间的间隔的属性：
+
+|名称|含义|默认值|
+|---|---|---|
+|app:sfv_horizontalSpacing|item之间的横向间隔|10dp|
+|app:sfv_verticalSpacing|item之间的纵向间隔|10dp|

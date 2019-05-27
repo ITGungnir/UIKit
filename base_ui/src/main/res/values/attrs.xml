@@ -13,6 +13,16 @@
         <attr name="cp_fabRippleColor" format="color" />
     </declare-styleable>
 
+    <declare-styleable name="FlexView">
+        <attr name="fv_horizontalSpacing" format="dimension" />
+        <attr name="fv_verticalSpacing" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="ScrollableFlexView">
+        <attr name="sfv_horizontalSpacing" format="dimension" />
+        <attr name="sfv_verticalSpacing" format="dimension" />
+    </declare-styleable>
+
     <declare-styleable name="HeadBar">
         <attr name="hb_textColor" format="color" />
         <attr name="hb_showDivider" format="boolean" />
