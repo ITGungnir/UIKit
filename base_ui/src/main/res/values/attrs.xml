@@ -3,6 +3,8 @@
 
     <declare-styleable name="Banner">
         <attr name="b_scrollTimeSpan" format="integer" />
+        <attr name="b_autoScroll" format="boolean" />
+        <attr name="b_infiniteScroll" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="CommonPage">

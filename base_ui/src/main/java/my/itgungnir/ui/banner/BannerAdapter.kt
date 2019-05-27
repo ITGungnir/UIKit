@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit
 
 class BannerAdapter(
     private val layoutId: Int,
+    private val isInfiniteScroll: Boolean,
     private val render: (position: Int, view: View, data: Any) -> Unit,
     private val onClick: (position: Int, data: Any) -> Unit
 ) : RecyclerView.Adapter<BannerAdapter.VH>() {
@@ -38,11 +39,7 @@ class BannerAdapter(
         RxView.clicks(vh.itemView)
             .throttleFirst(2L, TimeUnit.SECONDS)
             .subscribe {
-                val realPosition = when (vh.adapterPosition) {
-                    0 -> items.size - 3
-                    items.size - 1 -> 0
-                    else -> vh.adapterPosition - 1
-                }
+                val realPosition = calculateIndex(vh.adapterPosition, items.size, isInfiniteScroll)
                 onClick.invoke(realPosition, items[vh.adapterPosition])
             }
 
@@ -56,11 +53,7 @@ class BannerAdapter(
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        val realPosition = when (position) {
-            0 -> items.size - 3
-            items.size - 1 -> 0
-            else -> position - 1
-        }
+        val realPosition = calculateIndex(position, items.size, isInfiniteScroll)
         render.invoke(realPosition, holder.itemView, items[position])
     }
 

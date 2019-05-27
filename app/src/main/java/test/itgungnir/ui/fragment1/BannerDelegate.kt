@@ -20,14 +20,13 @@ class BannerDelegate : BaseDelegate<ChildState.BannerVO>() {
         container.apply {
             banner.bind<Int>(
                 layoutId = R.layout.list_item_banner_child,
-                items = listOf(),
                 render = { _, view, data ->
                     view.findViewById<ImageView>(R.id.imageView).imageResource = data
                 },
                 onClick = { position, _ ->
                     Toast.makeText(this.context, "Click on position $position", Toast.LENGTH_SHORT).show()
                 },
-                onPageChange = { position, totalCount, data ->
+                onPageChange = { position, totalCount, _ ->
                     indicator.text = "${position + 1}/$totalCount"
                 }
             )

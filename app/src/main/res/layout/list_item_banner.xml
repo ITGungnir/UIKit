@@ -9,6 +9,8 @@
         android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:b_autoScroll="true"
+        app:b_infiniteScroll="true"
         app:b_scrollTimeSpan="5" />
 
     <TextView

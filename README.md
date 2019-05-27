@@ -39,7 +39,6 @@ dependencies {
 参考不同控件的相关文档，使用控件即可。
 
 ## ToFix
-* Banner：控制自动滚动，控制无限滚动
 * ListFooter：自定义布局，响应式设置状态
 * EasyAdapter：简化API
 * HeadBar：支持工具按钮收缩
