@@ -41,7 +41,6 @@ dependencies {
 ## ToFix
 * HeadBar：支持工具按钮收缩
 * WebBrowser：支持文件下载、提供获取当前页标题和URL的接口
-* CommonPage：FAB点击消失
 
 ## License
 ```text

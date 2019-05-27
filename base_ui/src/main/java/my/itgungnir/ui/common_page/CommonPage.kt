@@ -12,7 +12,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import kotlinx.android.synthetic.main.view_common_page.view.*
 import my.itgungnir.ui.R
 import my.itgungnir.ui.status_view.StatusView
-import org.jetbrains.anko.backgroundColor
 import org.jetbrains.anko.imageResource
 
 class CommonPage @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :

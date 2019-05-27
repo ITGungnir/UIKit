@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
+import android.view.MotionEvent
 import android.view.View
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -22,8 +23,22 @@ class FabBehavior : FloatingActionButton.Behavior {
         child: FloatingActionButton,
         layoutDirection: Int
     ): Boolean {
-        child.scaleX = currScale
-        child.scaleY = currScale
+        child.apply {
+            scaleX = currScale
+            scaleY = currScale
+            setOnTouchListener { _, event ->
+                if (event.action == MotionEvent.ACTION_UP) {
+                    val x = ObjectAnimator.ofFloat(child, "scaleX", currScale, 0.01F)
+                    val y = ObjectAnimator.ofFloat(child, "scaleY", currScale, 0.01F)
+                    AnimatorSet().apply {
+                        play(x).with(y)
+                        duration = 250
+                    }.start()
+                    currScale = 0F
+                }
+                false
+            }
+        }
         return super.onLayoutChild(parent, child, layoutDirection)
     }
 
@@ -59,8 +74,8 @@ class FabBehavior : FloatingActionButton.Behavior {
         )
         if (dyConsumed >= 0) {
             if (currScale == 1F) {
-                val x = ObjectAnimator.ofFloat(child, "scaleX", 1F, 0F)
-                val y = ObjectAnimator.ofFloat(child, "scaleY", 1F, 0F)
+                val x = ObjectAnimator.ofFloat(child, "scaleX", currScale, 0F)
+                val y = ObjectAnimator.ofFloat(child, "scaleY", currScale, 0F)
                 AnimatorSet().apply {
                     play(x).with(y)
                     duration = 250
@@ -69,8 +84,8 @@ class FabBehavior : FloatingActionButton.Behavior {
             }
         } else {
             if (currScale == 0F) {
-                val x = ObjectAnimator.ofFloat(child, "scaleX", 0F, 1F)
-                val y = ObjectAnimator.ofFloat(child, "scaleY", 0F, 1F)
+                val x = ObjectAnimator.ofFloat(child, "scaleX", currScale, 1F)
+                val y = ObjectAnimator.ofFloat(child, "scaleY", currScale, 1F)
                 AnimatorSet().apply {
                     play(x).with(y)
                     duration = 250
