@@ -9,8 +9,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.extensions.LayoutContainer
 
-class EasyAdapter(private val recyclerView: RecyclerView, private val diffAnalyzer: Differ? = null) :
-    RecyclerView.Adapter<EasyAdapter.VH>() {
+class EasyAdapter(
+    private val recyclerView: RecyclerView,
+    private val layoutManager: RecyclerView.LayoutManager,
+    private val diffAnalyzer: Differ? = null
+) : RecyclerView.Adapter<EasyAdapter.VH>() {
 
     private val bindMap = mutableListOf<BindMap>()
 
@@ -70,6 +73,14 @@ class EasyAdapter(private val recyclerView: RecyclerView, private val diffAnalyz
     fun addDelegate(isForViewType: (data: ListItem) -> Boolean, delegate: Delegate): EasyAdapter {
         bindMap.add(BindMap(bindMap.count(), isForViewType, delegate))
         recyclerView.adapter = this
+        return this
+    }
+
+    fun initialize(): EasyAdapter {
+        recyclerView.apply {
+            layoutManager = this@EasyAdapter.layoutManager
+            adapter = this@EasyAdapter
+        }
         return this
     }
 

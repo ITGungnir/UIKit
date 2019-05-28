@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- LIGHT -->
     <color name="colorPure">#FFFFFFFF</color>
     <color name="colorPrimary">#FF008577</color>
     <color name="colorAccent">#FFD81B60</color>
@@ -10,15 +9,5 @@
     <color name="clr_background">#FFF5F5F5</color>
     <color name="clr_mask">#44000000</color>
     <color name="clr_text">#FF444444</color>
-
-    <!-- DARK -->
-    <!--<color name="colorPure">#FF000000</color>-->
-    <!--<color name="colorPrimary">#FF707070</color>-->
-    <!--<color name="colorAccent">#FFFFAB00</color>-->
-
-    <!--<color name="clr_divider">#FFC2C2C2</color>-->
-    <!--<color name="clr_background">#FF454545</color>-->
-    <!--<color name="clr_mask">#44000000</color>-->
-    <!--<color name="clr_text">#FFCDCDCD</color>-->
 
 </resources>

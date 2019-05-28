@@ -6,10 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 fun RecyclerView.bind(
     manager: RecyclerView.LayoutManager = LinearLayoutManager(context),
     diffAnalyzer: Differ? = null
-): EasyAdapter {
-    layoutManager = manager
-    return EasyAdapter(recyclerView = this, diffAnalyzer = diffAnalyzer)
-}
+): EasyAdapter = EasyAdapter(recyclerView = this, layoutManager = manager, diffAnalyzer = diffAnalyzer)
 
 @Suppress("UNCHECKED_CAST")
 fun <T : ListItem> RecyclerView.update(items: List<T>) {

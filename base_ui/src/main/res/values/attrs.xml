@@ -27,6 +27,9 @@
         <attr name="hb_textColor" format="color" />
         <attr name="hb_showDivider" format="boolean" />
         <attr name="hb_dividerColor" format="color" />
+        <attr name="hb_menuBackground" format="color" />
+        <attr name="hb_menuIconColor" format="color" />
+        <attr name="hb_menuTitleColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="IconFontView">

@@ -38,9 +38,6 @@ dependencies {
 ```
 参考不同控件的相关文档，使用控件即可。
 
-## ToFix
-* HeadBar：支持工具按钮收缩
-
 ## License
 ```text
 Copyright 2019 ITGungnir

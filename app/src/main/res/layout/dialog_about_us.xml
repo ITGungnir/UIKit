@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <my.itgungnir.ui.head_bar.HeadBar
+        android:id="@+id/headBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/white"
+        app:hb_dividerColor="@color/clr_divider"
+        app:hb_menuBackground="#115588"
+        app:hb_menuIconColor="#00FF00"
+        app:hb_menuTitleColor="@android:color/white"
+        app:hb_showDivider="true"
+        app:hb_textColor="@android:color/black" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AboutUsDialogAboutUsDialogAboutUsDialogAboutUsDialogAboutUsDialog"
+        android:textSize="@dimen/ui_kit_sp_text_size_1"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText,SpUsage" />
+
+</LinearLayout>

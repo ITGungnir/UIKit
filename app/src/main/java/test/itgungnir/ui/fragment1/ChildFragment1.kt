@@ -69,6 +69,7 @@ class ChildFragment1 : BaseFragment() {
                         }
                     }).addDelegate({ data -> data is ChildState.BannerVO }, BannerDelegate())
                     .addDelegate({ data -> data is ChildState.TextVO }, TextDelegate())
+                    .initialize()
                 // List Footer
                 footer = ListFooter.Builder()
                     .bindTo(list)

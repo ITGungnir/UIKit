@@ -40,6 +40,15 @@ class MainActivity : AppCompatActivity() {
             .addToolButton("\ue833") {
                 SearchDialog().show(supportFragmentManager, SearchDialog::class.java.name)
             }
+            .addMenuItem("\ue601", "关于我们") {
+                AboutUsDialog().show(supportFragmentManager, AboutUsDialog::class.java.name)
+            }
+            .addMenuItem("\ue6f2", "更换工具按钮图标") {
+                headBar.updateToolButton(0, "\uE6F2")
+            }
+            .addMenuItem("\ue617", "获取工具按钮数量") {
+                toast("共有${headBar.toolButtonCount()}个工具按钮")
+            }
 
         val selectedColor = Color.parseColor(COLOR_ICON_SELECT)
         val unSelectedColor = Color.parseColor(COLOR_DIVIDER)

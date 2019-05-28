@@ -20,10 +20,16 @@ class HeadBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? =
     RelativeLayout(context, attrs, defStyleAttr) {
 
     private var toolsLayout: LinearLayout? = null
+    private var menuView: IconFontView? = null
 
     private var textColor: Int = Color.WHITE
     private var showDivider: Boolean = false
     private var dividerColor: Int = Color.LTGRAY
+    private var menuBackground: Int = Color.WHITE
+    private var menuIconColor: Int = Color.BLACK
+    private var menuTitleColor: Int = Color.BLACK
+
+    private val menuList = mutableListOf<MenuItem>()
 
     init {
         View.inflate(context, R.layout.view_head_bar, this)
@@ -32,6 +38,9 @@ class HeadBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? =
             textColor = getColor(R.styleable.HeadBar_hb_textColor, textColor)
             showDivider = getBoolean(R.styleable.HeadBar_hb_showDivider, showDivider)
             dividerColor = getColor(R.styleable.HeadBar_hb_dividerColor, dividerColor)
+            menuBackground = getColor(R.styleable.HeadBar_hb_menuBackground, menuBackground)
+            menuIconColor = getColor(R.styleable.HeadBar_hb_menuIconColor, menuIconColor)
+            menuTitleColor = getColor(R.styleable.HeadBar_hb_menuTitleColor, menuTitleColor)
             recycle()
         }
 
@@ -46,7 +55,17 @@ class HeadBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? =
             divider.visibility = View.GONE
         }
 
+        menu.apply {
+            this.textColor = this@HeadBar.textColor
+            setOnClickListener {
+                HeadBarMenu(context, menuBackground, menuIconColor, menuTitleColor).apply {
+                    setItems(menuList)
+                }.showUnder(menu)
+            }
+        }
+
         toolsLayout = tools
+        menuView = menu
     }
 
     fun back(iconFont: String, onBackPressed: () -> Unit): HeadBar {
@@ -76,6 +95,12 @@ class HeadBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? =
                 .subscribe { callback.invoke() }
         }
         toolsLayout?.addView(view)
+        return this
+    }
+
+    fun addMenuItem(iconFont: String, title: String, callback: () -> Unit): HeadBar {
+        menuView?.visibility = View.VISIBLE
+        menuList.add(MenuItem(iconFont, title, callback))
         return this
     }
 
