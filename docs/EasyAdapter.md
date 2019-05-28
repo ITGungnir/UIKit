@@ -8,34 +8,11 @@
 * 需要进行局部刷新的列表页。
 
 ## 1、绑定RecyclerView
-`EasyAdapter`通过`bind()`方法将自己绑定到`RecyclerView`上。`bind()`方法有两个重载：
-```kotlin
-fun RecyclerView.bind(
-    manager: RecyclerView.LayoutManager = LinearLayoutManager(context),
-    diffAnalyzer: Differ? = null
-): EasyAdapter {
-    layoutManager = manager
-    return EasyAdapter(recyclerView = this, diffAnalyzer = diffAnalyzer)
-}
-```
-上述方法用于绑定多种`Delegate`（`viewType`），后续可以通过`addDelegate()`方法添加`Delegate`。
-```kotlin
-fun RecyclerView.bind(
-    manager: RecyclerView.LayoutManager = LinearLayoutManager(context),
-    delegate: Delegate,
-    diffAnalyzer: Differ? = null
-): EasyAdapter {
-    layoutManager = manager
-    return EasyAdapter(recyclerView = this, diffAnalyzer = diffAnalyzer)
-        .addDelegate(isForViewType = { true }, delegate = delegate)
-}
-```
-上述方法用于绑定单一的`Delegate`。
-
-`Demo`中的例子使用了第一种方法，分别绑定了`BannerDelegate`和`TextDelegate`：
+`EasyAdapter`通过以下方法将自己绑定到`RecyclerView`上：
 ```kotlin
 private var listAdapter: EasyAdapter? = null
 
+// bind()方法用来设置LayoutManager和Differ
 listAdapter = list.bind(
     diffAnalyzer = object : Differ {
         override fun areItemsTheSame(oldItem: ListItem, newItem: ListItem): Boolean =
@@ -58,8 +35,11 @@ listAdapter = list.bind(
             return if (bundle.isEmpty) null else bundle
         }
     })
+    // 添加Delegate，每个Delegate代表一种ViewType
     .addDelegate({ data -> data is ChildState.BannerVO }, BannerDelegate())
     .addDelegate({ data -> data is ChildState.TextVO }, TextDelegate())
+    // 完成最后的初始化工作
+    .initialize()
 ```
 `addDelegate()`方法中有两个参数，第一个参数是判定条件，即符合特定条件的数据才能展示为特定的`Delegate`；第二个参数是具体的`Delegate`对象。
 
@@ -96,7 +76,11 @@ class TextDelegate : BaseDelegate<ChildState.TextVO>() {
     override fun layoutId(): Int = R.layout.list_item_text
 
     // 在Delegate创建时调用的代码
-    override fun onCreateVH(container: View) {}
+    override fun onCreateVH(container: View) {
+        container.apply {
+            // ... your codes
+        }
+    }
 
     // 在Delegate被展示时调用的代码
     override fun onBindVH(
@@ -118,6 +102,13 @@ data class ChildState(/*...*/) : State {
         val id: Int,
         val text: String
     ) : ListItem
+}
+```
+在`Delegate`子类的`onCreateVH()`方法中，通过`container.apply {}`的方式对布局进行初始化：
+```kotlin
+container.apply {
+    menuIcon.textColor = menuIconColor
+    menuTitle.textColor = menuTitleColor
 }
 ```
 在`Delegate`子类的`onBindVH()`方法中，通过`holder.render(item) {}`的方式对布局进行渲染，此时可以使用`payloads`中的数据进行局部更新：
