@@ -28,8 +28,8 @@ class FabBehavior : FloatingActionButton.Behavior {
             scaleY = currScale
             setOnTouchListener { _, event ->
                 if (event.action == MotionEvent.ACTION_UP) {
-                    val x = ObjectAnimator.ofFloat(child, "scaleX", currScale, 0.01F)
-                    val y = ObjectAnimator.ofFloat(child, "scaleY", currScale, 0.01F)
+                    val x = ObjectAnimator.ofFloat(child, "scaleX", currScale, 0F)
+                    val y = ObjectAnimator.ofFloat(child, "scaleY", currScale, 0F)
                     AnimatorSet().apply {
                         play(x).with(y)
                         duration = 250
