@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.view_simple_dialog.*
 import my.itgungnir.ui.R
@@ -34,6 +35,13 @@ class SimpleDialog : DialogFragment() {
             this.onConfirm = onConfirm
             this.onCancel = onCancel
         }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+
+        dialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
+
+        super.onActivityCreated(savedInstanceState)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =

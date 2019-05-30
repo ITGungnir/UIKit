@@ -16,19 +16,20 @@ class SearchDialog : FullScreenDialog() {
         searchBar.back("\ue720") { dismiss() }
             .doOnSearch { toast(it) }
 
-        flexView.bind<FlexVO>(
-            layoutId = R.layout.list_item_flex,
-            render = { view, data ->
-                view.findViewById<Chip>(R.id.tagView).apply {
-                    text = data.tagName
-                    setOnClickListener {
-                        toast(data.tagName)
+        flexView.apply {
+            bind<FlexVO>(
+                layoutId = R.layout.list_item_flex,
+                render = { view, data ->
+                    view.findViewById<Chip>(R.id.tagView).apply {
+                        text = data.tagName
+                        setOnClickListener {
+                            toast(data.tagName)
+                        }
                     }
                 }
-            }
-        )
-
-        flexView.refresh(initData())
+            )
+            refresh(initData())
+        }
     }
 
     private fun initData(): List<FlexVO> {

@@ -17,6 +17,7 @@
 * [Input](./docs/Input.md)：一系列表单控件
 * [ListFooter](./docs/ListFooter.md)：用于为`RecyclerView`添加`加载更多`功能，可以自定义样式
 * [RichText](./docs/RichText.md)：用于方便快捷的展示富文本的控件
+* [ScreenAdapt](./docs/ScreenAdapt.md)：一个屏幕适配的极简解决方案
 * [SearchBar](./docs/SearchBar.md)：一个搜索栏控件
 * [StatusView](./docs/StatusView.md)：一个可以在不同状态下切换的控件
 
