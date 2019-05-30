@@ -4,6 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 @Suppress("JoinDeclarationAndAssignment")
 class ListFooter(
@@ -16,7 +17,7 @@ class ListFooter(
 
     private var footerAdapter: FooterAdapter
 
-    private var lastVisibleItem = 0
+    private var shouldLoadMore: Boolean = false
 
     private var hasMore = false
 
@@ -58,7 +59,7 @@ class ListFooter(
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    if (hasMore && lastVisibleItem == listAdapter.itemCount) {
+                    if (hasMore && shouldLoadMore) {
                         loadMore()
                     }
                 }
@@ -66,14 +67,18 @@ class ListFooter(
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                when (recyclerView.layoutManager) {
-                    is LinearLayoutManager -> lastVisibleItem =
-                        (recyclerView.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
-                    is GridLayoutManager -> lastVisibleItem =
-                        (recyclerView.layoutManager as GridLayoutManager).findLastVisibleItemPosition()
+                val manager = recyclerView.layoutManager
+                if (manager is LinearLayoutManager) {
+                    shouldLoadMore = manager.findLastCompletelyVisibleItemPosition() == listAdapter.itemCount
+                } else if (manager is GridLayoutManager) {
+                    shouldLoadMore = manager.findLastCompletelyVisibleItemPosition() == listAdapter.itemCount
+                } else if (manager is StaggeredGridLayoutManager) {
+                    var indexes = IntArray(manager.spanCount)
+                    indexes = manager.findLastCompletelyVisibleItemPositions(indexes)
+                    shouldLoadMore = indexes.contains(listAdapter.itemCount)
                 }
                 if (dy <= 0) {
-                    lastVisibleItem--
+                    shouldLoadMore = false
                 }
             }
         })
