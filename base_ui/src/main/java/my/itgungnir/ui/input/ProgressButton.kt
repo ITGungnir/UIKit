@@ -4,11 +4,11 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
-import android.util.TypedValue
 import android.view.View
 import android.widget.FrameLayout
 import kotlinx.android.synthetic.main.view_progress_button.view.*
 import my.itgungnir.ui.R
+import my.itgungnir.ui.dp2px
 import org.jetbrains.anko.backgroundDrawable
 
 /**
@@ -24,7 +24,7 @@ class ProgressButton @JvmOverloads constructor(context: Context, attrs: Attribut
     private var disabledColor: Int = Color.LTGRAY
     private var enabledTextColor: Int = Color.WHITE
     private var disabledTextColor: Int = Color.DKGRAY
-    private var cornerRadius: Float = dp2px(3F).toFloat()
+    private var cornerRadius: Float = context.dp2px(3F)
 
     init {
 
@@ -91,7 +91,4 @@ class ProgressButton @JvmOverloads constructor(context: Context, attrs: Attribut
         title.setTextColor(if (flag) enabledTextColor else disabledTextColor)
         backgroundDrawable = if (flag) enabledBg else disabledBg
     }
-
-    private fun dp2px(dp: Float): Int =
-        TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.displayMetrics).toInt()
 }

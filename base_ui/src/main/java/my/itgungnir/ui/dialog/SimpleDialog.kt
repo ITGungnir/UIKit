@@ -4,7 +4,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,7 @@ import androidx.annotation.ColorInt
 import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.view_simple_dialog.*
 import my.itgungnir.ui.R
+import my.itgungnir.ui.dp2px
 import org.jetbrains.anko.backgroundColor
 import org.jetbrains.anko.backgroundDrawable
 import org.jetbrains.anko.textColor
@@ -43,7 +43,7 @@ class SimpleDialog private constructor() : DialogFragment() {
 
         view.backgroundDrawable = GradientDrawable().apply {
             setColor(param.backgroundColor)
-            cornerRadius = dp2px(param.cornerRadius)
+            context?.dp2px(param.cornerRadius)?.let { cornerRadius = it }
         }
 
         if (param.title.isNullOrBlank()) {
@@ -136,8 +136,5 @@ class SimpleDialog private constructor() : DialogFragment() {
 
         fun create() = newInstance(parameter)
     }
-
-    private fun dp2px(dp: Float): Float =
-        TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context!!.resources.displayMetrics)
 
 }

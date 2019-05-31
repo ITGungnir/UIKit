@@ -12,8 +12,8 @@ import java.util.concurrent.TimeUnit
 /**
  * dp转px
  */
-fun Context.dp2px(dp: Float): Int =
-    TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.displayMetrics).toInt()
+fun Context.dp2px(dp: Float): Float =
+    TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.displayMetrics)
 
 /**
  * 获取XML配置中的颜色

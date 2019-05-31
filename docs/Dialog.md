@@ -87,4 +87,10 @@ SimpleDialog.Builder()
     .show(supportFragmentManager, SimpleDialog::class.java.name)
 ```
 
+# 3、NoTitleDialogFragment
+`NoTitleDialogFragment`是建议使用的对`DialogFragment`的封装，可以替代`DialogFragment`作为父类继承。
+
+`NoTitleDialogFragment`解决了低`Android`版本下残存标题栏的问题。
+
+# 4、注意事项
 **注意：** 建议使用`dialog.dismissAllowingStateLoss()`方法替代`dialog.dismiss()`方法！

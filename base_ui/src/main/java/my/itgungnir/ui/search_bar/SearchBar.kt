@@ -8,13 +8,12 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.view_search_bar.view.*
 import my.itgungnir.ui.R
+import my.itgungnir.ui.onAntiShakeClick
 import org.jetbrains.anko.backgroundColor
 import org.jetbrains.anko.hintTextColor
 import org.jetbrains.anko.textColor
-import java.util.concurrent.TimeUnit
 
 @SuppressLint("CheckResult")
 class SearchBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
@@ -69,20 +68,18 @@ class SearchBar @JvmOverloads constructor(context: Context, attrs: AttributeSet?
             text = iconFont
             visibility = View.VISIBLE
             this.textColor = this@SearchBar.textColor
-            RxView.clicks(this)
-                .throttleFirst(2L, TimeUnit.SECONDS)
-                .subscribe { block.invoke() }
+            this.onAntiShakeClick(2000L) {
+                block.invoke()
+            }
         }
         return this
     }
 
     fun doOnSearch(block: (String) -> Unit): SearchBar {
-        RxView.clicks(search)
-            .throttleFirst(2L, TimeUnit.SECONDS)
-            .subscribe {
-                val input = inputView?.editableText.toString().trim()
-                block.invoke(input)
-            }
+        search.onAntiShakeClick(2000L) {
+            val input = inputView?.editableText.toString().trim()
+            block.invoke(input)
+        }
         return this
     }
 

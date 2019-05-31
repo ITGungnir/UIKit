@@ -7,8 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.jakewharton.rxbinding2.view.RxView
-import java.util.concurrent.TimeUnit
+import my.itgungnir.ui.onAntiShakeClick
 
 class BannerAdapter(
     private val layoutId: Int,
@@ -36,12 +35,10 @@ class BannerAdapter(
             )
         )
 
-        RxView.clicks(vh.itemView)
-            .throttleFirst(2L, TimeUnit.SECONDS)
-            .subscribe {
-                val realPosition = calculateIndex(vh.adapterPosition, items.size, isInfiniteScroll)
-                onClick.invoke(realPosition, items[vh.adapterPosition])
-            }
+        vh.itemView.onAntiShakeClick(2000L) {
+            val realPosition = calculateIndex(vh.adapterPosition, items.size, isInfiniteScroll)
+            onClick.invoke(realPosition, items[vh.adapterPosition])
+        }
 
         return vh
     }

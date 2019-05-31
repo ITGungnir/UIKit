@@ -7,14 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
-import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.view_head_bar.view.*
 import my.itgungnir.ui.R
 import my.itgungnir.ui.icon_font.IconFontView
+import my.itgungnir.ui.onAntiShakeClick
 import org.jetbrains.anko.backgroundColor
 import org.jetbrains.anko.leftPadding
 import org.jetbrains.anko.textColor
-import java.util.concurrent.TimeUnit
 
 class HeadBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
     RelativeLayout(context, attrs, defStyleAttr) {
@@ -72,9 +71,9 @@ class HeadBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? =
         back.apply {
             text = iconFont
             visibility = View.VISIBLE
-            RxView.clicks(this)
-                .throttleFirst(2L, TimeUnit.SECONDS)
-                .subscribe { onBackPressed.invoke() }
+            this.onAntiShakeClick(2000L) {
+                onBackPressed.invoke()
+            }
         }
         title.leftPadding = 0
         return this
@@ -90,9 +89,9 @@ class HeadBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? =
         view.findViewById<IconFontView>(R.id.icon).apply {
             text = iconFont
             this.textColor = this@HeadBar.textColor
-            RxView.clicks(this)
-                .throttleFirst(2L, TimeUnit.SECONDS)
-                .subscribe { callback.invoke() }
+            this.onAntiShakeClick(2000L) {
+                callback.invoke()
+            }
         }
         toolsLayout?.addView(view)
         return this
