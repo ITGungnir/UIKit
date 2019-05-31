@@ -1,6 +1,6 @@
 # UIKit - Dialog
 
-`UIKit#Dialog`中目前提供了两种对话框：`FullScreenDialog`和`SimpleDialog`。
+`UIKit#Dialog`中目前提供了三种对话框：`FullScreenDialog`、`SimpleDialog`和`NoTitleDialogFragment`。
 
 ## 1、FullScreenDialog
 `FullScreenDialog`是一种可以铺满屏幕的对话框控件，使用时需注意为布局设置`layout_margin`属性以显示半透明的边缘：
