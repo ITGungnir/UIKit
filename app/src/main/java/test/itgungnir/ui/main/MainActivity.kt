@@ -27,15 +27,15 @@ class MainActivity : AppCompatActivity() {
         headBar.title("Test UIKit")
             .back("\ue720") { finish() }
             .addToolButton("\ue834") {
-                SimpleDialog.newInstance(
-                    bgColor = Color.parseColor(COLOR_DIALOG_BG),
-                    msgColor = Color.parseColor(COLOR_DIALOG_MSG),
-                    dividerColor = Color.parseColor(COLOR_DIVIDER),
-                    btnColor = Color.parseColor(COLOR_DIALOG_BTN),
-                    msg = "Simple Dialog Test for UIKit.",
-                    onConfirm = { toast("Confirm") },
-                    onCancel = { toast("Cancel") }
-                ).show(supportFragmentManager, SimpleDialog::class.java.name)
+                SimpleDialog.Builder()
+                    .backgroundColor(Color.parseColor(COLOR_DIALOG_BG), 10F)
+                    .dividerColor(Color.parseColor(COLOR_DIALOG_MSG))
+                    .title("UIKit Title", Color.BLACK)
+                    .message("Simple Dialog Test for UIKit.")
+                    .confirm("确定1", Color.RED) { toast("Confirm") }
+                    .cancel("取消1", Color.RED) { toast("Cancel") }
+                    .create()
+                    .show(supportFragmentManager, SimpleDialog::class.java.name)
             }
             .addToolButton("\ue833") {
                 SearchDialog().show(supportFragmentManager, SearchDialog::class.java.name)

@@ -67,15 +67,16 @@ class ListFooter(
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                val manager = recyclerView.layoutManager
-                if (manager is LinearLayoutManager) {
-                    shouldLoadMore = manager.findLastCompletelyVisibleItemPosition() == listAdapter.itemCount
-                } else if (manager is GridLayoutManager) {
-                    shouldLoadMore = manager.findLastCompletelyVisibleItemPosition() == listAdapter.itemCount
-                } else if (manager is StaggeredGridLayoutManager) {
-                    var indexes = IntArray(manager.spanCount)
-                    indexes = manager.findLastCompletelyVisibleItemPositions(indexes)
-                    shouldLoadMore = indexes.contains(listAdapter.itemCount)
+                when (val manager = recyclerView.layoutManager) {
+                    is LinearLayoutManager ->
+                        shouldLoadMore = manager.findLastCompletelyVisibleItemPosition() == listAdapter.itemCount
+                    is GridLayoutManager ->
+                        shouldLoadMore = manager.findLastCompletelyVisibleItemPosition() == listAdapter.itemCount
+                    is StaggeredGridLayoutManager -> {
+                        var indexes = IntArray(manager.spanCount)
+                        indexes = manager.findLastCompletelyVisibleItemPositions(indexes)
+                        shouldLoadMore = indexes.contains(listAdapter.itemCount)
+                    }
                 }
                 if (dy <= 0) {
                     shouldLoadMore = false

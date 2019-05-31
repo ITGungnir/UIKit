@@ -13,7 +13,7 @@ class SearchDialog : FullScreenDialog() {
 
     override fun initComponent() {
 
-        searchBar.back("\ue720") { dismiss() }
+        searchBar.back("\ue720") { dismissAllowingStateLoss() }
             .doOnSearch { toast(it) }
 
         flexView.apply {

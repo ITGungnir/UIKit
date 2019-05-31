@@ -17,7 +17,7 @@ class AboutUsDialog : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         headBar.title("关于我们")
-            .back("\uE720") { this.dismiss() }
+            .back("\uE720") { this.dismissAllowingStateLoss() }
             .addMenuItem("\ue6df", "增加") {}
             .addMenuItem("\ue6df", "增加") {}
             .addMenuItem("\ue6df", "增加") {}

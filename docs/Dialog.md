@@ -68,20 +68,23 @@ SearchDialog().show(supportFragmentManager, SearchDialog::class.java.name)
 # 2、SimpleDialog
 `SimpleDialog`是一种类似`iOS`系统中默认对话框的效果，仅有一个消息文本、一个`取消`按钮和一个`确定`按钮：
 ```kotlin
-SimpleDialog.newInstance(
-    // bgColor：对话框的背景颜色
-    bgColor = Color.parseColor(COLOR_DIALOG_BG),
-    // msgColor：对话框中消息文本的颜色
-    msgColor = Color.parseColor(COLOR_DIALOG_MSG),
-    // dividerColor：对话框中分隔线的颜色
-    dividerColor = Color.parseColor(COLOR_DIVIDER),
-    // btnColor：对话框中取消和确定按钮的颜色（确定按钮默认会加粗）
-    btnColor = Color.parseColor(COLOR_DIALOG_BTN),
-    // msg：对话框的消息文本
-    msg = "Simple Dialog Test for UIKit.",
-    // onConfirm：确定按钮的点击回调
-    onConfirm = { toast("Confirm") },
-    // onCancel：取消按钮的点击回调
-    onCancel = { toast("Cancel") }
-).show(supportFragmentManager, SimpleDialog::class.java.name)
+SimpleDialog.Builder()
+    // 设置Dialog的背景色和圆角尺寸(单位：DP)
+    .backgroundColor(Color.parseColor(COLOR_DIALOG_BG), 10F)
+    // 设置Dialog中分隔线的颜色
+    .dividerColor(Color.parseColor(COLOR_DIALOG_MSG))
+    // 设置Dialog的标题的文本和颜色，如果不写这行，则Dialog中不显示标题
+    .title("UIKit Title", Color.BLACK)
+    // 设置Dialog中信息的文本和颜色
+    .message("Simple Dialog Test for UIKit.", Color.DKGRAY)
+    // 设置确定按钮的文本、颜色和点击回调
+    .confirm("确定1", Color.RED) { toast("Confirm") }
+    // 设置取消按钮的文本、颜色和点击回调
+    .cancel("取消1", Color.RED) { toast("Cancel") }
+    // 创建Dialog
+    .create()
+    // 展示Dialog
+    .show(supportFragmentManager, SimpleDialog::class.java.name)
 ```
+
+**注意：** 建议使用`dialog.dismissAllowingStateLoss()`方法替代`dialog.dismiss()`方法！
