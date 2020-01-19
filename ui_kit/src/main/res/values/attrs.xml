@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="Banner">
+        <attr name="b_scrollTimeSpan" format="integer" />
+        <attr name="b_autoScroll" format="boolean" />
+        <attr name="b_infiniteScroll" format="boolean" />
+    </declare-styleable>
+
+</resources>

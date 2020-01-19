@@ -5,9 +5,4 @@
     <color name="colorPrimary">#FF008577</color>
     <color name="colorAccent">#FFD81B60</color>
 
-    <color name="clr_divider">#FFC2C2C2</color>
-    <color name="clr_background">#FFF5F5F5</color>
-    <color name="clr_mask">#44000000</color>
-    <color name="clr_text">#FF444444</color>
-
 </resources>

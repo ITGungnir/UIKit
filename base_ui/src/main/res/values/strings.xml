@@ -1,9 +1,0 @@
-<resources>
-
-    <string name="ui_kit_app_name">UIKit</string>
-
-    <string name="ui_kit_icon_menu">\ue710</string>
-
-    <string name="ui_kit_str_behavior_fab">my.itgungnir.ui.common_page.FabBehavior</string>
-
-</resources>

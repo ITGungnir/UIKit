@@ -17,13 +17,18 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute">
 
-        <activity android:name=".main.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-    </application>
+        <activity android:name=".banner.BannerActivity" />
 
+        <activity android:name=".rich_text.RichTextActivity" />
+
+        <activity android:name=".status_view.StatusViewActivity" />
+
+    </application>
 </manifest>

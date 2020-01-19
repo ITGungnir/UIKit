@@ -6,36 +6,26 @@
 
 `UIKit`是一个控件库，其中提供的控件及文档如下：
 * [Banner](./docs/Banner.md)：一个可以自动无限循环滚动的控件，可自定义设置自动滚动和无限滚动
-* [BottomTab](./docs/BottomTab.md)：一个底部导航栏控件
-* [Browser](./docs/Browser.md)：一个带进度条的网页加载和展示控件
-* [CommonPage](./docs/CommonPage.md)：一个通用页面
-* [Dialog](./docs/Dialog.md)：自定义封装的对话框
-* [EasyAdapter](./docs/EasyAdapter.md)：对`RecyclerView`的`Adapter`的封装，支持`多viewType`、`局部刷新`等
-* [Flex](./docs/Flex.md)：对`FlexLayout`的相关支持的封装
-* [HeadBar](./docs/HeadBar.md)：一个自定义封装的标题栏控件
-* [IconFont](./docs/IconFont.md)：一个可以展示`IconFont`字体的控件
-* [Input](./docs/Input.md)：一系列表单控件
-* [ListFooter](./docs/ListFooter.md)：用于为`RecyclerView`添加`加载更多`功能，可以自定义样式
 * [RichText](./docs/RichText.md)：用于方便快捷的展示富文本的控件
-* [ScreenAdapt](./docs/ScreenAdapt.md)：一个屏幕适配的极简解决方案
-* [SearchBar](./docs/SearchBar.md)：一个搜索栏控件
 * [StatusView](./docs/StatusView.md)：一个可以在不同状态下切换的控件
 
 ## 使用
-在`build.gradle`文件中加入如下依赖：
+在项目根目录下的`build.gradle`文件中添加`JitPack`仓库的引用：
+```groovy
+buildscript {
+    // ... Your codes
+    repositories {
+        // ... Your codes
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+在子模块的`build.gradle`文件中加入如下依赖：
 ```groovy
 dependencies {
     // ... Your codes
     api "com.github.ITGungnir:UIKit:$uikit_version"
 }
-```
-**注意：** 如果要使用`WebBrowser`控件，需要先在项目的`AndroidManifest.xml`文件中添加相关权限：
-```xml
-<manifest>
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!-- Your codes -->
-</manifest>
 ```
 参考不同控件的相关文档，使用控件即可。
 
